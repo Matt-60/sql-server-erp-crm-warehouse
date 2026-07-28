@@ -37,11 +37,11 @@ ERP (CSV) + CRM (CSV) ─► Bronze ─► Silver ─► Gold (Star Schema) ─�
 </details>
 
 <details>
-<summary><b>🔗 Data integration — merging ERP & CRM (click to expand)</b></summary>
+<summary><b>🔗 Data integration — ERD & column mapping (click to expand)</b></summary>
 
 <img width="1204" height="592" alt="data integration diagram" src="https://github.com/user-attachments/assets/8b61b141-1b7b-4f45-911d-25e0bf321bc2" />
 
-How records from the two disconnected source systems (ERP and CRM) are matched, deduplicated, and integrated into a single, consistent set of Silver/Gold entities.
+Entity-relationship diagram showing how ERP and CRM tables relate to each other and how their columns map into the unified Silver/Gold model.
 
 </details>
 
