@@ -2,7 +2,7 @@
 
 An end-to-end data warehousing and analytics solution — from raw ERP/CRM extracts to a documented, analytics-ready star schema in SQL Server. Built as a portfolio project demonstrating industry-standard data engineering practices.
 
-`SQL Server` · `T-SQL` · `Medallion Architecture` · `Star Schema` · `ETL`
+`SQL Server` · `T-SQL` · `Medallion Architecture` · `Star Schema` · `ETL` · `Data Quality`
 
 ---
 
@@ -11,14 +11,6 @@ An end-to-end data warehousing and analytics solution — from raw ERP/CRM extra
 The business runs on two disconnected systems — an ERP and a CRM — making it hard to get one consistent view of customers, products, and sales. This project consolidates both sources into a single SQL Server data warehouse, so analysts can answer questions about customer behavior, product performance, and sales trends from one clean, documented model instead of reconciling two systems by hand.
 
 ## 🏗️ Data Architecture
-data architecture:
-<img width="1221" height="611" alt="image" src="https://github.com/user-attachments/assets/039fc9f9-5325-4436-8f42-79b889b6ba2a" />
-dataflow:
-<img width="862" height="405" alt="image" src="https://github.com/user-attachments/assets/992dcdfc-ec3b-4ea6-a811-8b5a2e43849f" />
-data integration:
-<img width="1204" height="592" alt="image" src="https://github.com/user-attachments/assets/8b61b141-1b7b-4f45-911d-25e0bf321bc2" />
-
-
 
 ```
 ERP (CSV) + CRM (CSV) ─► Bronze ─► Silver ─► Gold (Star Schema) ─► SQL Reports / BI
@@ -26,24 +18,58 @@ ERP (CSV) + CRM (CSV) ─► Bronze ─► Silver ─► Gold (Star Schema) ─�
 
 | Layer | Purpose |
 |---|---|
-| **Bronze** | Raw data as-is from ERP + CRM CSV exports, loaded into SQL Server |
-| **Silver** | Cleansing, standardization, and normalization to prepare data for analysis |
-| **Gold** | Business-ready star schema for reporting and analytics |
+| **Bronze** | Raw data as-is from ERP + CRM CSV exports, loaded into SQL Server, no transformations |
+| **Silver** | Cleansing, standardization, deduplication, and normalization — resolving conflicts between the two source systems before integration |
+| **Gold** | Business-ready star schema — dimension and fact views for reporting and analytics |
+
+<details>
+<summary><b>🖼️ Architecture diagram (click to expand)</b></summary>
+
+<img width="1221" height="611" alt="data architecture diagram" src="https://github.com/user-attachments/assets/039fc9f9-5325-4436-8f42-79b889b6ba2a" />
+
+</details>
+
+<details>
+<summary><b>🔀 Dataflow — Bronze → Silver → Gold (click to expand)</b></summary>
+
+<img width="862" height="405" alt="dataflow diagram" src="https://github.com/user-attachments/assets/992dcdfc-ec3b-4ea6-a811-8b5a2e43849f" />
+
+</details>
+
+<details>
+<summary><b>🔗 Data integration — merging ERP & CRM (click to expand)</b></summary>
+
+<img width="1204" height="592" alt="data integration diagram" src="https://github.com/user-attachments/assets/8b61b141-1b7b-4f45-911d-25e0bf321bc2" />
+
+How records from the two disconnected source systems (ERP and CRM) are matched, deduplicated, and integrated into a single, consistent set of Silver/Gold entities.
+
+</details>
 
 ## 🚀 Scope
 
 **Data Engineering:**
 - Two source systems (ERP + CRM), CSV-based, latest snapshot only (no historization required)
-- Data quality cleansing and resolution before integration
+- Data quality cleansing and conflict resolution before integration
 - Combined into a single, documented, analytics-friendly model
+- Documented **data catalog** and **naming conventions**, enforced consistently across Bronze/Silver/Gold
 
 **Analytics (SQL-based):**
 - Customer behavior
 - Product performance
 - Sales trends
 
-  <img width="1531" height="640" alt="image" src="https://github.com/user-attachments/assets/caa17bb1-27f5-41ac-9a24-cf3d73371972" />
+<details>
+<summary><b>📊 Example analytics output (click to expand)</b></summary>
 
+<img width="1531" height="640" alt="analytics query example" src="https://github.com/user-attachments/assets/caa17bb1-27f5-41ac-9a24-cf3d73371972" />
+
+</details>
+
+## 🧠 Key Design Decisions
+
+- **Medallion architecture** — keeps raw data untouched in Bronze for traceability/reprocessing, isolates cleansing logic in Silver, and exposes only business-ready models in Gold
+- **Documented naming conventions & data catalog** — every table/column follows a defined standard from day one, so the model stays consistent as more sources or analysts are added
+- **Latest-snapshot approach** — since source systems don't require historical tracking here, the model favors simplicity over unnecessary SCD complexity
 
 <details>
 <summary><b>📂 Repository structure (click to expand)</b></summary>
