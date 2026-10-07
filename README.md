@@ -1,6 +1,6 @@
 # SQL Server ERP + CRM Data Warehouse
 
-An end-to-end data warehousing and analytics solution — from raw ERP/CRM extracts to a documented, analytics-ready star schema in SQL Server. Built as a portfolio project demonstrating industry-standard data engineering practices.
+An end-to-end data warehousing and analytics solution — from raw ERP/CRM extracts to a documented, analytics-ready star schema in SQL Server. Built while following the Data With Baraa SQL Data Warehouse course; used to practise T-SQL ETL and medallion design
 
 `SQL Server` · `T-SQL` · `Medallion Architecture` · `Star Schema` · `ETL` · `Data Quality`
 
