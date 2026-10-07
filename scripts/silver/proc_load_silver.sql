@@ -179,4 +179,5 @@ BEGIN
 		maintenance
 	FROM bronze.erp_px_cat_g1v2;
 END
+GO
 EXEC Silver.load_silver
